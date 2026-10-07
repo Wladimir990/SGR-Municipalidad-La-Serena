@@ -1,0 +1,135 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Validaciones
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+
+    <h2>Validaciones</h2>
+
+    <p>
+        Consulta las evidencias que han sido revisadas
+        y el resultado registrado por el verificador.
+    </p>
+
+</section>
+
+
+<section class="formulario-contenedor">
+
+    <div class="formulario-titulo">
+
+        <h3>Historial de validaciones</h3>
+
+        <p>
+            Registro de revisiones realizadas en el sistema.
+        </p>
+
+    </div>
+
+
+    {% if validaciones %}
+
+    <div class="tabla-contenedor">
+
+        <table class="tabla-sistema">
+
+            <thead>
+                <tr>
+                    <th>Evidencia</th>
+                    <th>Revisor</th>
+                    <th>Resultado</th>
+                    <th>Observación</th>
+                    <th>Revisada en</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for validacion in validaciones %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ validacion.evidencia }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ validacion.revisor.username }}
+                    </td>
+
+                    <td>
+
+                        {% if validacion.aprobada %}
+
+                        <span class="estado estado-aprobado">
+                            Aprobada
+                        </span>
+
+                        {% else %}
+
+                        <span class="estado estado-rechazado">
+                            Rechazada
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {% if validacion.observacion %}
+                        {{ validacion.observacion }}
+                        {% else %}
+                        Sin observaciones
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ validacion.revisada_en|date:"d/m/Y H:i" }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="mensaje-vacio">
+
+        <strong>No existen validaciones registradas.</strong>
+
+        <p>
+            Cuando se revise una evidencia aparecerá en este listado.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="acciones-formulario">
+
+        <a href="{% url 'crear_validacion' %}" class="boton">
+            Nueva validación
+        </a>
+
+        <a href="{% url 'panel_verificador' %}" class="boton boton-secundario">
+            Volver al panel
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

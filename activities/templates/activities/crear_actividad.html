@@ -1,0 +1,99 @@
+{% extends "activities/base.html" %}
+
+{% block title %}Registrar actividad{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+    <h2>Registrar nueva actividad</h2>
+    <p>
+        Complete los antecedentes de la actividad municipal.
+        La actividad quedará asociada automáticamente al funcionario conectado.
+    </p>
+</section>
+
+<section class="formulario-contenedor">
+
+    <div class="formulario-titulo">
+        <h3>Datos de la actividad</h3>
+        <p>Ingrese la información solicitada para registrar la actividad.</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% if formulario.errors %}
+        <div class="mensaje-error">
+            Existen datos que deben ser revisados antes de guardar.
+        </div>
+        {% endif %}
+
+        <div class="grupo-campo">
+            <label for="{{ formulario.titulo.id_for_label }}">
+                Título
+            </label>
+            {{ formulario.titulo }}
+            {{ formulario.titulo.errors }}
+        </div>
+
+        <div class="grupo-campo">
+            <label for="{{ formulario.descripcion.id_for_label }}">
+                Descripción
+            </label>
+            {{ formulario.descripcion }}
+            {{ formulario.descripcion.errors }}
+        </div>
+
+        <div class="fila-formulario">
+
+            <div class="grupo-campo">
+                <label for="{{ formulario.fecha_actividad.id_for_label }}">
+                    Fecha de actividad
+                </label>
+                {{ formulario.fecha_actividad }}
+                {{ formulario.fecha_actividad.errors }}
+            </div>
+
+            <div class="grupo-campo">
+                <label for="{{ formulario.lugar.id_for_label }}">
+                    Lugar
+                </label>
+                {{ formulario.lugar }}
+                {{ formulario.lugar.errors }}
+            </div>
+
+        </div>
+
+        <div class="grupo-campo">
+            <label for="{{ formulario.contacto.id_for_label }}">
+                Contacto
+            </label>
+            {{ formulario.contacto }}
+            {{ formulario.contacto.errors }}
+        </div>
+
+        <div class="grupo-campo">
+            <label for="{{ formulario.observaciones.id_for_label }}">
+                Observaciones
+            </label>
+            {{ formulario.observaciones }}
+            {{ formulario.observaciones.errors }}
+        </div>
+
+        <div class="acciones-formulario">
+
+            <button type="submit" class="boton">
+                Guardar actividad
+            </button>
+
+            <a href="{% url 'panel_funcionario' %}" class="boton boton-secundario">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

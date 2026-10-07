@@ -1,0 +1,142 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Mis actividades
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+    <h2>Mis actividades</h2>
+
+    <p>
+        Consulta las actividades registradas por tu usuario,
+        revisa sus antecedentes y verifica su estado actual.
+    </p>
+</section>
+
+
+<section class="formulario-contenedor">
+
+    <div class="formulario-titulo">
+        <h3>Actividades registradas</h3>
+
+        <p>
+            Estas son las actividades asociadas a
+            {{ request.user.username }}.
+        </p>
+    </div>
+
+
+    {% if actividades %}
+
+    <div class="tabla-contenedor">
+
+        <table class="tabla-sistema">
+
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Fecha</th>
+                    <th>Lugar</th>
+                    <th>Contacto</th>
+                    <th>Estado</th>
+                    <th>Creado en</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for actividad in actividades %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ actividad.titulo }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ actividad.fecha_actividad }}
+                    </td>
+
+                    <td>
+                        {{ actividad.lugar }}
+                    </td>
+
+                    <td>
+                        {% if actividad.contacto %}
+                        {{ actividad.contacto }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if actividad.estado == "Aprobada" %}
+                        <span class="estado estado-aprobado">
+                            {{ actividad.estado }}
+                        </span>
+
+                        {% elif actividad.estado == "Rechazada" %}
+                        <span class="estado estado-rechazado">
+                            {{ actividad.estado }}
+                        </span>
+
+                        {% elif actividad.estado == "Pendiente" %}
+                        <span class="estado estado-pendiente">
+                            {{ actividad.estado }}
+                        </span>
+
+                        {% else %}
+                        <span class="estado estado-borrador">
+                            {{ actividad.estado }}
+                        </span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ actividad.creado_en|date:"d/m/Y H:i" }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="mensaje-vacio">
+
+        <strong>No existen actividades registradas.</strong>
+
+        <p>
+            Puedes comenzar registrando una nueva actividad.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="acciones-formulario">
+
+        <a href="{% url 'crear_actividad' %}" class="boton">
+            Crear nueva actividad
+        </a>
+
+        <a href="{% url 'panel_funcionario' %}" class="boton boton-secundario">
+            Volver al panel
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

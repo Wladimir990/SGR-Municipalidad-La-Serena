@@ -1,0 +1,57 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Panel Verificador
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+
+    <h2>Panel del Verificador</h2>
+
+    <p>
+        Bienvenido, {{ request.user.username }}.
+        Desde aquí puedes revisar las evidencias registradas
+        y gestionar sus validaciones.
+    </p>
+
+</section>
+
+
+<section class="tarjetas">
+
+    <article class="tarjeta">
+
+        <h3>Ver validaciones</h3>
+
+        <p>
+            Consulta el historial de evidencias revisadas,
+            su resultado y las observaciones registradas.
+        </p>
+
+        <a class="boton" href="{% url 'ver_validaciones' %}">
+            Ver validaciones
+        </a>
+
+    </article>
+
+
+    <article class="tarjeta">
+
+        <h3>Nueva validación</h3>
+
+        <p>
+            Selecciona una evidencia registrada y determina
+            si corresponde aprobarla o rechazarla.
+        </p>
+
+        <a class="boton" href="{% url 'crear_validacion' %}">
+            Crear validación
+        </a>
+
+    </article>
+
+</section>
+
+{% endblock %}

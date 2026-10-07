@@ -1,0 +1,73 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Panel Funcionario
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+
+    <h2>Panel del Funcionario</h2>
+
+    <p>
+        Bienvenido, {{ request.user.username }}.
+        Desde aquí puedes registrar actividades, revisar su estado
+        y subir evidencias asociadas.
+    </p>
+
+</section>
+
+
+<section class="tarjetas">
+
+    <article class="tarjeta">
+
+        <h3>Crear actividad</h3>
+
+        <p>
+            Registra una nueva actividad municipal con su fecha,
+            lugar, descripción y datos asociados.
+        </p>
+
+        <a class="boton" href="{% url 'crear_actividad' %}">
+            Crear actividad
+        </a>
+
+    </article>
+
+
+    <article class="tarjeta">
+
+        <h3>Mis actividades</h3>
+
+        <p>
+            Consulta las actividades registradas y revisa
+            su estado actual dentro del sistema.
+        </p>
+
+        <a class="boton" href="{% url 'mis_actividades' %}">
+            Ver actividades
+        </a>
+
+    </article>
+
+
+    <article class="tarjeta">
+
+        <h3>Subir evidencia</h3>
+
+        <p>
+            Adjunta un archivo como respaldo de una actividad
+            registrada previamente.
+        </p>
+
+        <a class="boton" href="{% url 'subir_evidencia' %}">
+            Subir evidencia
+        </a>
+
+    </article>
+
+</section>
+
+{% endblock %}

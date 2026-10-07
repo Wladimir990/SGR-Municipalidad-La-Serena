@@ -1,0 +1,147 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Subir evidencia
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+
+    <h2>Subir evidencia</h2>
+
+    <p>
+        Adjunta un archivo de respaldo asociado a una actividad
+        registrada en el Sistema de Gestión y Registro Municipal.
+    </p>
+
+</section>
+
+
+<section class="formulario-contenedor">
+
+    <div class="formulario-titulo">
+
+        <h3>Datos de la evidencia</h3>
+
+        <p>
+            Selecciona la actividad correspondiente y adjunta
+            el archivo que servirá como respaldo.
+        </p>
+
+    </div>
+
+
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+
+        {% if formulario.errors %}
+
+        <div class="mensaje-error">
+            Existen datos que deben ser revisados antes de guardar.
+        </div>
+
+        {% endif %}
+
+
+        <div class="grupo-campo">
+
+            <label for="{{ formulario.actividad.id_for_label }}">
+                Actividad
+            </label>
+
+            {{ formulario.actividad }}
+
+            {{ formulario.actividad.errors }}
+
+            <small class="texto-ayuda">
+                Selecciona la actividad municipal a la que pertenece esta evidencia.
+            </small>
+
+        </div>
+
+
+        <div class="grupo-campo">
+
+            <label for="{{ formulario.archivo.id_for_label }}">
+                Archivo de evidencia
+            </label>
+
+
+            <div class="carga-archivo">
+
+                <div class="carga-icono">
+                    ↑
+                </div>
+
+
+                <div class="carga-informacion">
+
+                    <strong>
+                        Adjuntar archivo de respaldo
+                    </strong>
+
+                    <p>
+                        Selecciona una fotografía, documento o archivo
+                        relacionado con la actividad municipal.
+                    </p>
+
+
+                    <div class="selector-archivo">
+
+                        {{ formulario.archivo }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{ formulario.archivo.errors }}
+
+
+            <small class="texto-ayuda">
+                El archivo quedará asociado a la actividad seleccionada.
+            </small>
+
+        </div>
+
+
+        <div class="grupo-campo">
+
+            <label for="{{ formulario.descripcion.id_for_label }}">
+                Descripción
+            </label>
+
+            {{ formulario.descripcion }}
+
+            {{ formulario.descripcion.errors }}
+
+            <small class="texto-ayuda">
+                Describe brevemente qué demuestra o respalda el archivo adjunto.
+            </small>
+
+        </div>
+
+
+        <div class="acciones-formulario">
+
+            <button type="submit" class="boton">
+                Guardar evidencia
+            </button>
+
+
+            <a href="{% url 'panel_funcionario' %}" class="boton boton-secundario">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

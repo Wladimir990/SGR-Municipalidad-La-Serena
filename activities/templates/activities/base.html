@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {% block title %}
+        Sistema de Gestión y Registro Municipal
+        {% endblock %}
+
+    </title>
+
+
+    <link rel="stylesheet" href="{% static 'activities/css/styles.css' %}?v=5">
+
+</head>
+
+
+<body>
+
+
+    <header class="topbar">
+
+
+        <div class="brand">
+
+            <h1>
+                La Serena
+            </h1>
+
+            <span>
+                Sistema de Gestión y Registro Municipal
+            </span>
+
+        </div>
+
+
+        <div class="usuario">
+
+
+            <div class="datos-usuario">
+
+                <span class="usuario-label">
+                    Usuario
+                </span>
+
+                <strong>
+                    {{ request.user.username }}
+                </strong>
+
+            </div>
+
+
+            <a href="{% url 'cerrar_sesion' %}" class="cerrar-sesion">
+                Cerrar sesión
+            </a>
+
+
+        </div>
+
+
+    </header>
+
+
+    <main class="contenedor">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <footer class="footer-sistema">
+
+        Sistema de Gestión y Registro Municipal · La Serena
+
+    </footer>
+
+
+</body>
+
+</html>

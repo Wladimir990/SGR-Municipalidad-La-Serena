@@ -1,0 +1,35 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Acceso denegado
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+    <h2>Acceso restringido</h2>
+
+    <p>
+        El usuario {{ request.user.username }}
+        no tiene permisos para acceder a esta sección.
+    </p>
+</section>
+
+<section class="tarjetas">
+
+    <article class="tarjeta">
+        <h3>Permisos insuficientes</h3>
+
+        <p>
+            Tu cuenta no pertenece al grupo requerido para
+            acceder a este módulo del sistema.
+        </p>
+
+        <a class="boton" href="/admin/">
+            Volver al inicio
+        </a>
+    </article>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "activities/base.html" %}
+
+{% block title %}
+Nueva validación
+{% endblock %}
+
+{% block content %}
+
+<section class="encabezado-panel">
+
+    <h2>Nueva validación</h2>
+
+    <p>
+        Revisa una evidencia registrada y deja constancia
+        del resultado de la revisión.
+    </p>
+
+</section>
+
+
+<section class="formulario-contenedor">
+
+    <div class="formulario-titulo">
+
+        <h3>Revisión de evidencia</h3>
+
+        <p>
+            Selecciona la evidencia y registra el resultado
+            correspondiente.
+        </p>
+
+    </div>
+
+
+    <form method="post">
+
+        {% csrf_token %}
+
+
+        {% if formulario.errors %}
+
+        <div class="mensaje-error">
+            Existen datos que deben ser revisados antes de guardar.
+        </div>
+
+        {% endif %}
+
+
+        <div class="grupo-campo">
+
+            <label for="{{ formulario.evidencia.id_for_label }}">
+                Evidencia
+            </label>
+
+            {{ formulario.evidencia }}
+
+            {{ formulario.evidencia.errors }}
+
+        </div>
+
+
+        <div class="bloque-aprobacion">
+
+            <div class="aprobacion-texto">
+
+                <strong>Resultado de la revisión</strong>
+
+                <span>
+                    Marca esta opción si la evidencia cumple
+                    correctamente con los requisitos.
+                </span>
+
+            </div>
+
+            <div class="aprobacion-check">
+
+                {{ formulario.aprobada }}
+
+                <label for="{{ formulario.aprobada.id_for_label }}">
+                    Evidencia aprobada
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <div class="grupo-campo">
+
+            <label for="{{ formulario.observacion.id_for_label }}">
+                Observación
+            </label>
+
+            {{ formulario.observacion }}
+
+            {{ formulario.observacion.errors }}
+
+            <small class="texto-ayuda">
+                Registra comentarios relevantes sobre la revisión realizada.
+            </small>
+
+        </div>
+
+
+        <div class="acciones-formulario">
+
+            <button type="submit" class="boton">
+                Guardar validación
+            </button>
+
+            <a href="{% url 'panel_verificador' %}" class="boton boton-secundario">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}
