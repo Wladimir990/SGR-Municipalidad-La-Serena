@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'activities',
     'validations',
     'organization',
+    'planning',
 ]
 
 MIDDLEWARE = [
